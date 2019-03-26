@@ -32,7 +32,7 @@ $(document).ready(function(){
         var articlePanels = [];
         // We pass each article JSON object to the createPanel funiton which returns a bootstrap
         // panel with our article data inside
-        for (var i = 0; i < articleContainer.length, i++) {
+        for (var i = 0; i < articles.length; i++) {
             articlePanels.push(createPanel(articles[i]));
         }
         // Once we have all HTML for articles stored in our articlePanels array,
@@ -45,7 +45,7 @@ $(document).ready(function(){
         // It constructs a jQuery element containing all formatted HTML
         // for article panel
         var panel =
-        $(["<div class='panel [[panel-default'>",
+        $(["<div class='panel panel-default'>",
             "div class='panel-heading'>",
             "<h3>",
             article.headline,
@@ -58,7 +58,7 @@ $(document).ready(function(){
             article.summary,
             "</div>",
             "</div>",
-        ].join("");
+        ].join(""));
         // Attach article's id to jQuery element
         // Use when trying to figure out which article the user wants to save
     panel.data("_id", article._id);
@@ -109,7 +109,7 @@ $(document).ready(function(){
         });
     }
 
-    function handleArticleToScrape() {
+    function handleArticleScrape() {
         // This function handles user clicking any "scrape new article" buttons
         $.get("/api/fetch")
         .then(function(data) {
