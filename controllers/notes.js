@@ -1,16 +1,16 @@
 // Bring in our scrape script and makeDate scripts
-var scrape = require("../scripts/scrape");
+var Note = require("../models/Note");
 var makeDate = require("../scripts/date");
 
 module.exports = {
     get: function(data, cb) {
         Note.find({
-            _articleId: data._id
+            _headlineId: data._id
         }, cb);
     },
     save: function(data, cb) {
         var newNote = {
-            _articleId: data._id,
+            _headlineId: data._id,
             date: makeDate(),
             noteText: data.noteText
         };

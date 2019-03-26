@@ -4,8 +4,8 @@
 // Bring in Scrape function and scripts directory
 var scrape = request("/scripts/scrape.js");
 
-// Bring in articles and notes from controller
-var articlesController = require("../controllers/articles");
+// Bring in headlines and notes from controller
+var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
 module.exports = function(router) {
@@ -19,7 +19,7 @@ module.exports = function(router) {
     });
 
     router.get("/api/fetch", function(req, res) {
-        articlesController.fetch(function(err, docs) {
+        headlinesController.fetch(function(err, docs) {
             if (!docs || docs.insertedCount === 0) {
                 res.json({
                     message: "No new articles today. Check back tomorrow."
@@ -32,35 +32,38 @@ module.exports = function(router) {
             }
         });
     });
-    router.get("/api/articles", function(req, res) {
+
+        router.get("/api/headlines", function(req, res) {
         var query = {};
         if (req.query.saved) {
             query = req.query;
         }
-        articlesController.get(query, function(data){
+        headlinesController.get(query, function(data){
             res.json(data);
         });
     });
-    router.delete("/api/articles/:id", function(req, res) {
+
+    router.delete("/api/headlines/:id", function(req, res) {
         var query = {};
         query._id = req.params.id;
-        articlesController.delete(query, function(err, data){
+        headlinesController.delete(query, function(err, data){
             res.json(data);
         });
     });
 
-    router.patch("/api/articles", function(req, res) {
-        articlesController.update(req.body, function(err, data){
+    router.patch("/api/headlines", function(req, res) {
+        headlinesController.update(req.body, function(err, data){
             res.json(data);
         });
     });
-    router.get("/api/notes/:article_id?", function(req, res){
+
+    router.get("/api/notes/:headline_id?", function(req, res){
         var query = {};
-        if (req.params.article_id) {
-            query._id = req.params.article_id;
+        if (req.params.headline_id) {
+            query._id = req.params.headline_id;
         }
 
-        articlesController.get(query, function(err, data){
+        notesController.get(query, function(err, data){
             res.json(data);
         });
     });
@@ -68,7 +71,7 @@ module.exports = function(router) {
     router.delete("/api/notes/:id", function(req, res){
         var query = {};
         query._id = req.params.id;
-        articlesController.delete(query, function(err, data){
+        notesController.delete(query, function(err, data){
             res.json(data);
         });
     });

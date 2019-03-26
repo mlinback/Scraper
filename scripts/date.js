@@ -1,5 +1,3 @@
-import { format } from "path";
-
 var makeDate = function() {
     var d = new Date();
     var formattedDate = "";

@@ -2,28 +2,28 @@
 var scrape = require("../scripts/scrape");
 var makeDate = require("../scripts/date");
 
-// Bring in the Article and note mongoose models
-var Article = require("../models/Article");
+// Bring in the Headline and note mongoose models
+var Headline = require("../models/Headline");
 
 module.exports = {
     fetch: function(cb) {
         scrape(function(data) {
             var articles = data;
-            for (var i=0, i < articles.length; i++) {
+            for (var i=0; i < articles.length; i++) {
                 articles[i].date = makeDate();
                 articles[i].saved = false;
             }
 
-            Article.collection.insertMany(artiles, {ordered:false}, function(err, docs){
+            Headline.collection.insertMany(articles, {ordered:false}, function(err, docs){
                 cb(err, docs);
             });
         });
     },
     delete: function(query, cb) {
-        Article.remove(query,cb);
+        Headline.remove(query,cb);
     },
     get: function(query, cb) {
-        Article.find(query)
+        Headline.find(query)
         .sort({
             _id: -1
         })
@@ -32,7 +32,7 @@ module.exports = {
         });
     },
     update: function(query, cb) {
-        Article.update({_id: query,_id}, {
+        Headline.update({_id: query,_id}, {
             $set: query
         }, {}, cb);
     }
