@@ -1,12 +1,12 @@
-// Server routes
-// =============
+// // Server routes
+// // =============
 
-// Bring in Scrape function and scripts directory
-var scrape = request("/scripts/scrape.js");
+// // Bring in Scrape function and scripts directory
+// var scrape = request("/scripts/scrape.js");
 
-// Bring in headlines and notes from controller
-var headlinesController = require("../controllers/headlines");
-var notesController = require("../controllers/notes");
+// // Bring in headlines and notes from controller
+// var headlinesController = require("../controllers/headlines");
+// var notesController = require("../controllers/notes");
 
 module.exports = function(router) {
     // This route renders the homepage

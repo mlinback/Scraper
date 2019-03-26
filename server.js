@@ -20,7 +20,7 @@ require("./config/routes")(router);
 app.use(express.static(__dirname + "/public"));
 
 // Connect Handlebars to Express app
-app.enging("handlebars", expressHandlebars({
+app.connect("handlebars", expressHandlebars({
     defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
