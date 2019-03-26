@@ -1,5 +1,3 @@
-import { truncate } from "fs";
-
 // /* global bootbox */
 $(document).ready(function () {
     // Getting a reference to the article container div we will render all articles inside of
@@ -34,7 +32,7 @@ $(document).ready(function () {
         var articlePanels = [];
         // We pass each article JSON object to the createPanel funiton which returns a bootstrap
         // panel with our article data inside
-        for (var i = 0; i < articleContainer.length, i++) {
+        for (var i = 0; i < articles.length; i++) {
             articlePanels.push(createPanel(articles[i]));
         }
         // Once we have all HTML for articles stored in our articlePanels array,
@@ -47,7 +45,7 @@ $(document).ready(function () {
         // It constructs a jQuery element containing all formatted HTML
         // for article panel
         var panel =
-            $(["<div class='panel [[panel-default'>",
+            $(["<div class='panel panel-default'>",
                 "div class='panel-heading'>",
                 "<h3>",
                 article.headline,
@@ -149,7 +147,7 @@ $(document).ready(function () {
             // Constructing our initial HTML to ad to notes modal
             var modalText = [
                 "<div class='container-fluid text-center'>",
-                "<h4>Notes For Article:",
+                "<h4>Notes For Article: ",
                 currentArticle._id,
                 "</h4>",
                 "<hr />",
@@ -171,6 +169,8 @@ $(document).ready(function () {
             // Adding information about article and article notes to save button
             // When trying to add a new note
             $(".btn.save").data("article", noteData);
+            // renderNotesList will populate actual note HTML inside modal we just created
+            renderNotesList(noteData);
         });
     }
 
